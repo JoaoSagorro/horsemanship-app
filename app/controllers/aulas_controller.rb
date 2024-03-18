@@ -6,6 +6,12 @@ class AulasController < ApplicationController
   end
 
   def show
+    @user = current_user
+    @aula = Aula.find(params[:id])
+  end
+
+  def today
+    @user = current_user
     @aula = Aula.find(params[:id])
   end
 end

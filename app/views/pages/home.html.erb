@@ -1,6 +1,8 @@
-<h1>Register class</h1>
-<p>List of classes:</p>
-
-<%= link_to "About", "/about" %>
-<%= link_to "School", "/school"%>
-
+<% if !user_signed_in? %>
+  <%= link_to "About", "/about" %>
+  <%= link_to "School", "/school"%>
+<% else %>
+  <%# TODO: change email to user_name %>
+  <%= "Welcome #{current_user.email}" %>
+  <%= link_to "Today", today_path %>
+<% end %>
