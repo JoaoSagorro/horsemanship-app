@@ -13,5 +13,14 @@
     <li>
       <%= aula.end_time.hour %><%=aula.end_time.min > 0 ? ":" + aula.end_time.min.to_s : "" %>h
     </li>
+    <% if aula.booked? %>
+      <li>
+        You're booked
+      </li>
+    <% else %>
+      <li>
+        You're not booked
+      </li>
+    <% end %>
   </ul>
 <% end %>
