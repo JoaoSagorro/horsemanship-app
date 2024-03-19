@@ -3,6 +3,6 @@
   <%= link_to "School", "/school"%>
 <% else %>
   <%# TODO: change email to user_name %>
-  <%= "Welcome #{current_user.email}" %>
+  <%= "Welcome #{current_user.first_name} #{current_user.last_name} ->  #{current_user.role}" %>
   <%= link_to "Today", today_path %>
 <% end %>

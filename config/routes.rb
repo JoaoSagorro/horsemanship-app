@@ -1,10 +1,13 @@
 Rails.application.routes.draw do
   devise_for :users
+
   root to: "pages#home"
+
   get "about", to: "pages#about"
   get "school", to: "pages#school"
-  resources :aulas
   get "today", to: "aulas#today"
+  
+  resources :aulas
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # TODO: figure out how to redirect after login

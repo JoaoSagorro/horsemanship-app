@@ -10,8 +10,29 @@ class AulasController < ApplicationController
     @aula = Aula.find(params[:id])
   end
 
+  # def new
+  #   @aula = Aula.new
+  # end
+
+  # def create
+  #   @aula = Aula.new(set_params)
+  #   if @aula.save
+  #     @aula.user_ids = params[:aula][:user_ids] || []
+  #     redirect_to today_path
+  #   else
+  #     render :new, status: :unprocessable_entity
+  #   end
+  # end
+
   def today
     @user = current_user
-    # @aula = Aula.find(params[:id])
+    @aulas = Aula.all
+  end
+
+
+  private
+
+  def set_params
+    params.require(:aula).permit(:title, :description, :class_type, :comments, :occurs_date, :start_time, :end_time, :booked)
   end
 end
