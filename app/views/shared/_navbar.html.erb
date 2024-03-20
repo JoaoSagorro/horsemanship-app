@@ -1,8 +1,14 @@
 <div class="navbar navbar-expand-sm navbar-light navbar-lewagon">
   <div class="container-fluid">
-    <% if current_user.professor? %>
-      <%= link_to "/today", class: "navbar-brand" do %>
-        <%= image_tag "logo.png" %>
+    <% if user_signed_in? %>
+      <% if current_user.professor? || current_user.admin? %>
+        <%= link_to "/today", class: "navbar-brand" do %>
+          <%= image_tag "logo.png" %>
+        <% end %>
+      <% else %>
+        <%= link_to "/", class: "navbar-brand" do %>
+          <%= image_tag "logo.png" %>
+        <% end %>
       <% end %>
     <% else %>
       <%= link_to "/", class: "navbar-brand" do %>
