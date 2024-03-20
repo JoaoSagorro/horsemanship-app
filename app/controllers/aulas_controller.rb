@@ -1,6 +1,8 @@
 class AulasController < ApplicationController
   skip_before_action :authenticate_user!, only: [ :index, :show]
 
+  helper_method :booked_class
+
   def index
     @aulas = Aula.all
   end
@@ -38,13 +40,22 @@ class AulasController < ApplicationController
     end
   end
 
-  def delete
-    
+  def destroy
+    @aula = Aula.find(params[:id])
+
+    @aula.destroy
+
+    redirect_to aulas_path
   end
 
   def today
     @user = current_user
     @aulas = Aula.all
+  end
+
+  def booked_class(class_id)
+    @aula = Aula.find(class_id)
+    @aula.booked? ? @aula.booked = false : @aula.booked = true
   end
 
 

@@ -11,6 +11,7 @@
   <% if  aula.occurs_date === Date.today %>
     <ul>
       <%= link_to "Edit", edit_aula_path(aula.id) %>
+      <%= link_to "Destroy", aula_path(aula.id), data: { turbo_method: :delete, turbo_confirm: "Tem a certeza?" } %>
       <li>
         <%= aula.occurs_date.strftime("%a, %d %b %Y") %>
       </li>
@@ -22,6 +23,12 @@
       <li>
         <%= aula.end_time.hour %><%=aula.end_time.min > 0 ? ":" + aula.end_time.min.to_s : "" %>h
       </li>
+
+      <%= buton_to "Book", { :action => "booked_class", :controller => "aulas" } %>
+
+      <button>
+        <%= booked_class(aula.id) %>
+      </button>
       <% if aula.booked? %>
         <li>
           You're booked

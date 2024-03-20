@@ -3,6 +3,20 @@
 
 <% @aulas.each do |aula| %>
   <% aula.user_ids.each do |user| %>
-    <%= aula.title if user == current_user.id && aula.booked? %>
+    <%= aula.title if user === current_user.id || aula.booked? %>
+
+    <div data-controller="book-class" class="card">
+      <div class="card-header">
+        <%= aula.class_type %>
+      </div>
+      <div class="card-body">
+        <h5 class="card-title"><%= aula.title %></h5>
+        <p class="card-text"><%= aula.description %></p>
+          <button data-book-class-target="toggle" data-action="click->book-class#booked" class="btn btn-primary" >
+            Book
+          </button>
+      </div>
+    </div>
+
   <% end %>
 <% end %>
