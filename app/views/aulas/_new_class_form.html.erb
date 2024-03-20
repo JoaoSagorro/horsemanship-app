@@ -1,0 +1,32 @@
+<h1>Olá Olá</h1>
+
+<%= simple_form_for @aula do |f| %>
+
+  <%= f.input :title,
+              label: "Nome",
+              input_html: {autocomplete: "title", style: "background: white;", placeholder: "Nome"} %>
+  <%= f.input :description,
+              label: "Descrição da aula",
+              input_html: {autocomplete: "title", style: "background: white;", placeholder: "Descrição da aula"} %>
+  <%= f.input :class_type,
+              label: "Tipo de aula",
+              input_html: {autocomplete: "title", style: "background: white;", placeholder: "Tipo de aula"} %>
+  <%= f.input :occurs_date,
+              as: :string,
+              input_html: { data: { controller: "datepicker" }, style: "background: white;" },
+              label: "Data e hora" %>
+  <%= f.input :start_time,
+              :minute_step => 5,
+              label: false,
+              input_html: {autocomplete: "title", style: "background: white;", placeholder: "Hora de início"} %>
+  <%= f.input :end_time,
+              :minute_step => 5,
+              label: false,
+              input_html: {
+                autocomplete: "title",
+                style: "background: white;",
+                placeholder: "Hora de término"} %>
+
+  <%= f.submit class: "btn btn-primary" %>
+  <%= link_to "Cancel", :back, class: "btn btn-secondary" %>
+<% end %>

@@ -10,19 +10,37 @@ class AulasController < ApplicationController
     @aula = Aula.find(params[:id])
   end
 
-  # def new
-  #   @aula = Aula.new
-  # end
+  def new
+    @aula = Aula.new
+  end
 
-  # def create
-  #   @aula = Aula.new(set_params)
-  #   if @aula.save
-  #     @aula.user_ids = params[:aula][:user_ids] || []
-  #     redirect_to today_path
-  #   else
-  #     render :new, status: :unprocessable_entity
-  #   end
-  # end
+  def create
+    @aula = Aula.new(set_params)
+    if @aula.save
+      @aula.user_ids = params[:aula][:user_ids] || []
+      redirect_to aulas_path
+    else
+      render :new, status: :unprocessable_entity
+    end
+  end
+
+  def edit
+    @aula = Aula.find(params[:id])
+  end
+
+  def update
+    @aula = Aula.find(params[:id])
+    if @aula.update(set_params)
+      @aula.user_ids = params[:aula][:user_ids] || []
+      redirect_to aulas_path
+    else
+      render :edit, status: :unprocessable_entity
+    end
+  end
+
+  def delete
+    
+  end
 
   def today
     @user = current_user
