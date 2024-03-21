@@ -24,7 +24,7 @@
         <%= aula.end_time.hour %><%=aula.end_time.min > 0 ? ":" + aula.end_time.min.to_s : "" %>h
       </li>
 
-      <%= buton_to "Book", { :action => "booked_class", :controller => "aulas" } %>
+      <%= button_to "Book", booked_class_aula_path(aula.id), data: { turdbo_method: :patch } %>
 
       <button>
         <%= booked_class(aula.id) %>

@@ -53,9 +53,11 @@ class AulasController < ApplicationController
     @aulas = Aula.all
   end
 
-  def booked_class(class_id)
-    @aula = Aula.find(class_id)
-    @aula.booked? ? @aula.booked = false : @aula.booked = true
+  def booked_class(_class_id)
+    @class_id = params[:id]
+    @aulas = Aula.all
+    @aula = @aulas.find(@class_id)
+    @aula.update(booked: !@aula.booked)
   end
 
 
