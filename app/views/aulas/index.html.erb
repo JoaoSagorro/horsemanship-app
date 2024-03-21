@@ -24,11 +24,8 @@
         <%= aula.end_time.hour %><%=aula.end_time.min > 0 ? ":" + aula.end_time.min.to_s : "" %>h
       </li>
 
-      <%= button_to "Book", booked_class_aula_path(aula.id), data: { turdbo_method: :patch } %>
+      <%= button_to "Book", booked_class_aula_path(aula), data: { turbo_method: :patch, turbo_confirm: "Está feito!" } %>
 
-      <button>
-        <%= booked_class(aula.id) %>
-      </button>
       <% if aula.booked? %>
         <li>
           You're booked
