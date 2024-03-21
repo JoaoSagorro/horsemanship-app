@@ -1,8 +1,6 @@
 class AulasController < ApplicationController
   skip_before_action :authenticate_user!, only: [ :index, :show]
 
-  helper_method :booked_class
-
   def index
     @aulas = Aula.all
   end

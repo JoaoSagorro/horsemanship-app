@@ -8,7 +8,9 @@ Rails.application.routes.draw do
   get "today", to: "aulas#today"
 
   resources :aulas do
-    patch "booked_class", on: :member
+    member do
+      patch :booked_class
+    end
   end
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
