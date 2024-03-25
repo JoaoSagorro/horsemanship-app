@@ -7,4 +7,5 @@ class Aula < ApplicationRecord
   validates :occurs_date, presence: true
   validates :start_time, presence: true
   validates :end_time, presence: true
+  validates :spots, presence: true
 end

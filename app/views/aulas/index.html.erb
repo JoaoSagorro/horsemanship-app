@@ -24,11 +24,9 @@
         <%= aula.end_time.hour %><%=aula.end_time.min > 0 ? ":" + aula.end_time.min.to_s : "" %>h
       </li>
 
-      <%= link_to "Book", booked_class_aula_path(aula.id), data: {turbo_method: :patch}, class: "btn btn-primary" %>
+      <%= aula.spots %>
 
-      <%= aula.booked %>
-
-      <% if aula.booked? %>
+      <% if aula.spots %>
         <li>
           You're booked
         </li>
