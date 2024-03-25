@@ -11,6 +11,10 @@
   <%= f.input :class_type,
               label: "Tipo de aula",
               input_html: {autocomplete: "title", style: "background: white;", placeholder: "Tipo de aula"} %>
+  <%= f.input :spots,
+              label: "Número de vagas",
+              :collection => (1..5).map { |number| number },
+              input_html: {autocomplete: "vagas", style: "background: white;", placeholder: "Vagas"} %>
   <%= f.input :occurs_date,
               as: :string,
               input_html: { data: { controller: "datepicker" }, style: "background: white;" },

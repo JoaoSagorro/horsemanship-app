@@ -9,6 +9,7 @@ Rails.application.routes.draw do
 
   resources :aulas do
     member do
+      resources :bookings
       patch :booked_class
     end
   end

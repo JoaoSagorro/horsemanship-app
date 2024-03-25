@@ -60,6 +60,6 @@ class AulasController < ApplicationController
   private
 
   def set_params
-    params.require(:aula).permit(:title, :description, :class_type, :comments, :occurs_date, :start_time, :end_time, :booked)
+    params.require(:aula).permit(:title, :description, :class_type, :comments, :occurs_date, :start_time, :end_time, :spots)
   end
 end
