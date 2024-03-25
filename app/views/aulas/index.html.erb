@@ -23,7 +23,7 @@
       <li>
         <%= aula.end_time.hour %><%=aula.end_time.min > 0 ? ":" + aula.end_time.min.to_s : "" %>h
       </li>
-      <%= link_to "Marcar Aula", new_booking_path(aula.id), data: { turbo_method: :post }, class: "btn btn-primary" %>
+      <%= link_to "Marcar Aula", new_booking_path(aula.id), class: "btn btn-primary" %>
 
 
 
