@@ -8,34 +8,28 @@
 
 
 <% @aulas.each do |aula| %>
-  <% if  aula.occurs_date === Date.today %>
+  <% if aula.occurs_date == Date.today %>
     <ul>
-      <%= link_to "Edit", edit_aula_path(aula.id) %>
-      <%= link_to "Destroy", aula_path(aula.id), data: { turbo_method: :delete, turbo_confirm: "Tem a certeza?" } %>
-      <li>
-        <%= aula.occurs_date.strftime("%a, %d %b %Y") %>
-      </li>
+      <%= link_to "Edit", edit_aula_path(aula) %>
+      <%= link_to "Destroy", aula_path(aula), data: { turbo_method: :delete, turbo_confirm: "Tem a certeza?" } %>
+      <li><%= aula.occurs_date.strftime("%a, %d %b %Y") %></li>
+      <li><%= aula.start_time.strftime("%H:%M") %></li>
+      <li><%= aula.end_time.strftime("%H:%M") %></li>
+      <li><%= aula.spots %></li>
 
-      <li>
-        <%= aula.start_time.hour %><%=aula.start_time.min > 0 ? ":" + aula.start_time.min.to_s : "" %>h
-      </li>
-
-      <li>
-        <%= aula.end_time.hour %><%=aula.end_time.min > 0 ? ":" + aula.end_time.min.to_s : "" %>h
-      </li>
-      <%= link_to "Marcar Aula", new_booking_path(aula.id), class: "btn btn-primary" %>
-
-
-      <%= aula.spots %>
-
-      <% if aula.spots %>
-        <li>
-          You're booked
-        </li>
-      <% else %>
-        <li>
-          You're not booked
-        </li>
+      <% if user_signed_in? && !aula.spots.zero? %>
+        <% booking = current_user.bookings.find_by(aula_id: aula.id) %>
+        <% if booking %>
+          <li>You're booked</li>
+        <% else %>
+          <li>
+            <%= simple_form_for [aula, Booking.new], html: { data: { turbo: false } } do |f| %>
+              <%= f.hidden_field :attendees, value: 1 %>
+              <%= f.hidden_field :status, value: true %>
+              <%= f.submit "Book Class", class: "btn btn-primary" %>
+            <% end %>
+          </li>
+        <% end %>
       <% end %>
     </ul>
   <% end %>

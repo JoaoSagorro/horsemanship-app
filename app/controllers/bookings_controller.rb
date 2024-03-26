@@ -1,21 +1,39 @@
 class BookingsController < ApplicationController
 
-  def new
-    @booking = Booking.new
-  end
-
+  # def new
+  #   @aula = Aula.find(params[:aula_id])
+  #   @booking = Booking.new(aula_id: @aula.id)
+  # end
   def create
-    @booking = Booking.new(set_params)
-    @aula = Aula.find(params[:id])
-    raise
-    @booking.aula_id = @aula.id
-    @booking.user_id = current_user.id
-    if @booking.save
-      @booking.update(status: !@booking.status)
-      redirect_to aulas_path
+    @aula = Aula.find(params[:aula_id])
+    booking = current_user.bookings.find_by(aula_id: @aula.id)
+
+    if booking.nil?
+    # Create a new booking
+      @booking = Booking.new(aula_id: @aula.id, user_id: current_user.id, status: true)
+      @aula.increment!(:attendees)
+    else
+    # Cancel existing booking
+      @booking = booking
+      @aula.decrement!(:attendees)
+      @booking.status = false
+    end
+
+    if @booking.save && @aula.save
+      redirect_to aulas_path, notice: 'Booking was successfully created/canceled.'
     else
       render :new, status: :unprocessable_entity
     end
+    # @booking = Booking.new(set_params)
+    # @booking.aula_id = @aula.id
+    # @booking.user_id = current_user.id
+    # @booking.attendees += 1
+    # if @booking.save
+    #   @booking.update(status: !@booking.status)
+    #   redirect_to aulas_path
+    # else
+    #   render :new, status: :unprocessable_entity
+    # end
   end
 
   private
