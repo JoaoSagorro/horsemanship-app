@@ -8,7 +8,7 @@ Rails.application.routes.draw do
   get "today", to: "aulas#today"
 
   resources :aulas do
-    resources :bookings, only: %i[create destroy]
+    resources :bookings, only: %i[create update destroy]
   end
 
 

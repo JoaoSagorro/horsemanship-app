@@ -19,13 +19,30 @@
 
       <% if user_signed_in? && !aula.spots.zero? %>
         <% booking = current_user.bookings.find_by(aula_id: aula.id) %>
-        <% booking_status = booking ? "Aula marcada!" : "" %>
-        <% attendees_count = booking ? 1 : 0 %>
+
+        <%= "this is the status --> #{booking.status}" %>
+
+        <% if booking.status %>
+          <% attendees_count = booking.attendees %>
+          <% booking_status = "Aula marcada" %>
+        <% else %>
+          <% attendees_count = 0 %>
+          <% booking_status = "" %>
+        <% end %>
+
         <li>
-          <%= simple_form_for [aula, Booking.new], url: aula_bookings_path(aula), html: { method: :post } do |f| %>
-            <%= f.hidden_field :attendees, value: attendees_count %>
-            <%= f.hidden_field :status, value: booking_status %>
-            <%= f.submit booking ? 'Cancel Booking' : 'Book Class', class: "btn btn-primary" %>
+          <% if booking.present? %>
+            <%= simple_form_for booking, url: aula_bookings_path(aula, booking), html: { method: :patch } do |f| %>
+              <%= f.hidden_field :attendees, value: attendees_count %>
+              <%= f.hidden_field :status, value: booking_status %>
+              <%= f.submit booking.status ? 'Cancel Booking' : 'Book Class', class: "btn btn-primary" %>
+            <% end %>
+          <% else %>
+            <%= simple_form_for [aula, Booking.new], url: aula_bookings_path(aula), html: { method: :post } do |f| %>
+              <%= f.hidden_field :attendees, value: attendees_count %>
+              <%= f.hidden_field :status, value: booking_status %>
+              <%= f.submit booking.status ? 'Cancel Booking' : 'Book Class', class: "btn btn-primary" %>
+            <% end %>
           <% end %>
         </li>
 
