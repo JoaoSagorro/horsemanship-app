@@ -22,14 +22,11 @@
         <% booking_status = booking ? "Aula marcada!" : "" %>
         <% attendees_count = booking ? 1 : 0 %>
         <li>
-          <button
-            class="btn btn-primary book-class-button"
-            data-aula-id="<%= aula.id %>"
-            data-booking-status="<%= booking_status %>"
-            data-booking-status="<%= attendees_count %>"
-          >
-            <%= booking ? "Cancelar aula" : "Marcar aula" %>
-          </button>
+          <%= simple_form_for [aula, Booking.new], url: aula_bookings_path(aula), html: { method: :post } do |f| %>
+            <%= f.hidden_field :attendees, value: attendees_count %>
+            <%= f.hidden_field :status, value: booking_status %>
+            <%= f.submit booking ? 'Cancel Booking' : 'Book Class', class: "btn btn-primary" %>
+          <% end %>
         </li>
 
       <% end %>

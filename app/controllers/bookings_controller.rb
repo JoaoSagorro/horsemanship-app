@@ -11,19 +11,24 @@ class BookingsController < ApplicationController
 
     if booking.nil?
     # Create a new booking
-      @booking = Booking.new(aula_id: @aula.id, user_id: current_user.id, status: true)
-      @booking.increment!(:attendees)
+      # @booking = Booking.new(aula_id: @aula.id, user_id: current_user.id, status: true)
+      # @booking.increment!(:attendees)
+      @booking = Booking.new(booking_params)
+      @booking.user_id = current_user.id
+      @booking.aula_id = @aula.id
+      @booking.increment!(:attendees) if @booking.save
     else
     # Cancel existing booking
-      @booking = booking
-      @booking.decrement!(:attendees)
-      @booking.status = false
+    @booking = booking
+    @booking.decrement!(:attendees)
+    @booking.status = false
+
     end
 
     if @booking.save && @aula.save
       redirect_to aulas_path, notice: 'Booking was successfully created/canceled.'
     else
-      render :new, status: :unprocessable_entity
+      render :index
     end
     # @booking = Booking.new(set_params)
     # @booking.aula_id = @aula.id
