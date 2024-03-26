@@ -19,17 +19,19 @@
 
       <% if user_signed_in? && !aula.spots.zero? %>
         <% booking = current_user.bookings.find_by(aula_id: aula.id) %>
-        <% if booking %>
-          <li>You're booked</li>
-        <% else %>
-          <li>
-            <%= simple_form_for [aula, Booking.new], html: { data: { turbo: false } } do |f| %>
-              <%= f.hidden_field :attendees, value: 1 %>
-              <%= f.hidden_field :status, value: true %>
-              <%= f.submit "Book Class", class: "btn btn-primary" %>
-            <% end %>
-          </li>
-        <% end %>
+        <% booking_status = booking ? "Aula marcada!" : "" %>
+        <% attendees_count = booking ? 1 : 0 %>
+        <li>
+          <button
+            class="btn btn-primary book-class-button"
+            data-aula-id="<%= aula.id %>"
+            data-booking-status="<%= booking_status %>"
+            data-booking-status="<%= attendees_count %>"
+          >
+            <%= booking ? "Cancelar aula" : "Marcar aula" %>
+          </button>
+        </li>
+
       <% end %>
     </ul>
   <% end %>

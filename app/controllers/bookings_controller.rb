@@ -1,4 +1,5 @@
 class BookingsController < ApplicationController
+  skip_before_action :verify_authenticity_token, :only => [:create]
 
   # def new
   #   @aula = Aula.find(params[:aula_id])
@@ -11,11 +12,11 @@ class BookingsController < ApplicationController
     if booking.nil?
     # Create a new booking
       @booking = Booking.new(aula_id: @aula.id, user_id: current_user.id, status: true)
-      @aula.increment!(:attendees)
+      @booking.increment!(:attendees)
     else
     # Cancel existing booking
       @booking = booking
-      @aula.decrement!(:attendees)
+      @booking.decrement!(:attendees)
       @booking.status = false
     end
 
