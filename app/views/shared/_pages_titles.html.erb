@@ -4,4 +4,6 @@
   <h1>Agenda para hoje</h1>
 <% elsif controller_name === "aulas" && action_name === "show" %>
   <h1><%= @aula.title %></h1>
+<% elsif controller_name === "aulas" && action_name === "new" %>
+  <h1>Nova aula</h1>
 <% end %>

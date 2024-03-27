@@ -1,37 +1,36 @@
-<h1>Olá Olá</h1>
+<div class="mx-3 mt-3 mb-3">
+  <%= simple_form_for @aula do |f| %>
 
-<%= simple_form_for @aula do |f| %>
+    <%= f.input :title,
+                label: "Nome",
+                input_html: {autocomplete: "title", style: "background: white;", placeholder: "Nome"} %>
+    <%= f.input :description,
+                label: "Descrição da aula",
+                input_html: {autocomplete: "title", style: "background: white;", placeholder: "Descrição da aula"} %>
+    <%= f.input :class_type,
+                label: "Tipo de aula",
+                input_html: {autocomplete: "title", style: "background: white;", placeholder: "Tipo de aula"} %>
+    <%= f.input :spots,
+                label: "Número de vagas",
+                :collection => (1..5).map { |number| number },
+                input_html: {autocomplete: "vagas", style: "background: white;", placeholder: "Vagas"} %>
+    <%= f.input :occurs_date,
+                as: :string,
+                input_html: { data: { controller: "datepicker" }, style: "background: white;" },
+                label: "Data e hora" %>
+    <%= f.input :start_time,
+                :minute_step => 5,
+                label: false,
+                input_html: {autocomplete: "title", style: "background: white;", placeholder: "Hora de início"} %>
+    <%= f.input :end_time,
+                :minute_step => 5,
+                label: false,
+                input_html: {
+                  autocomplete: "title",
+                  style: "background: white;",
+                  placeholder: "Hora de término"} %>
 
-  <%= f.input :title,
-              label: "Nome",
-              input_html: {autocomplete: "title", style: "background: white;", placeholder: "Nome"} %>
-  <%= f.input :description,
-              label: "Descrição da aula",
-              input_html: {autocomplete: "title", style: "background: white;", placeholder: "Descrição da aula"} %>
-  <%= f.input :class_type,
-              label: "Tipo de aula",
-              :collection,
-              input_html: {autocomplete: "title", style: "background: white;", placeholder: "Tipo de aula"} %>
-  <%= f.input :spots,
-              label: "Número de vagas",
-              :collection => (1..5).map { |number| number },
-              input_html: {autocomplete: "vagas", style: "background: white;", placeholder: "Vagas"} %>
-  <%= f.input :occurs_date,
-              as: :string,
-              input_html: { data: { controller: "datepicker" }, style: "background: white;" },
-              label: "Data e hora" %>
-  <%= f.input :start_time,
-              :minute_step => 5,
-              label: false,
-              input_html: {autocomplete: "title", style: "background: white;", placeholder: "Hora de início"} %>
-  <%= f.input :end_time,
-              :minute_step => 5,
-              label: false,
-              input_html: {
-                autocomplete: "title",
-                style: "background: white;",
-                placeholder: "Hora de término"} %>
-
-  <%= f.submit class: "btn btn-primary" %>
-  <%= link_to "Cancel", :back, class: "btn btn-secondary" %>
-<% end %>
+    <%= f.submit class: "btn btn-primary" %>
+    <%= link_to "Cancel", :back, class: "btn btn-secondary" %>
+  <% end %>
+</div>

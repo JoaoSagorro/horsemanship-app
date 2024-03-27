@@ -24,7 +24,7 @@
         </div>
 
         <div class="card-body d-flex justify-content-around">
-          <div class="d-flex flex-column justify-content-start border-div full-width">
+          <div class="d-flex flex-column justify-content-start  full-width">
             <p>
               <%= aula.class_type %>
             </p>
@@ -49,17 +49,30 @@
               <% booking_status = "" %>
             <% end %>
 
-            <div class="border-div d-flex align-items-center">
+            <div class=" d-flex flex-column justify-content-center align-items-center">
               <% total_attendees = bookings.sum(:attendees) %>
               <% spots_available = aula.spots - total_attendees %>
-              <%= "#{total_attendees}/#{aula.spots}" %>
+              <h3>Vagas:</h3>
+              <div
+                <% if total_attendees === aula.spots%>
+                  class="text-red d-flex align-items-center mb-2"
+                <% elsif total_attendees === aula.spots * 0.75 %>
+                  class="text-orange d-flex align-items-center mb-2"
+                <% else %>
+                  class="text-green d-flex align-items-center mb-2"
+                <% end %>
+              >
+
+                  <%= "#{total_attendees}/#{aula.spots}" %>
+
+              </div>
               <% if booking.present? %>
-                <%= link_to "Cancelar", aula_booking_path(aula, booking), data: { turbo_method: :delete }, class: "btn btn-secondary ms-2" %>
+                <%= link_to "Cancelar", aula_booking_path(aula, booking), data: { turbo_method: :delete }, class: "btn btn-secondary" %>
               <% else %>
                 <%= simple_form_for [aula, Booking.new], url: aula_bookings_path(aula), html: { method: :post } do |f| %>
                   <%= f.hidden_field :attendees, value: attendees_count %>
                   <%= f.hidden_field :status, value: booking_status %>
-                  <%= f.submit booking.present? ? '' : 'Marcar aula', class: "btn btn-primary ms-2 border-div" %>
+                  <%= f.submit booking.present? ? '' : 'Marcar aula', class: "btn btn-primary" %>
                 <% end %>
               <% end %>
             </div>
