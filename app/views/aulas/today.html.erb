@@ -5,7 +5,7 @@
   <% aula.user_ids.each do |user| %>
     <%= aula.title if user === current_user.id %>
 
-    <div data-controller="book-class" class="card">
+    <div data-controller="book-class" class="card mx-2">
       <div class="card-header">
         <%= aula.class_type %>
       </div>
