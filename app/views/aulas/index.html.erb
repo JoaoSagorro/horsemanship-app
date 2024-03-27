@@ -8,6 +8,8 @@
 
 
 <% @aulas.each do |aula| %>
+  <% bookings = Booking.where(aula_id: aula.id) %>
+
   <% if aula.occurs_date == Date.today %>
     <ul>
       <%= link_to "Edit", edit_aula_path(aula) %>
@@ -15,14 +17,16 @@
       <li><%= aula.occurs_date.strftime("%a, %d %b %Y") %></li>
       <li><%= aula.start_time.strftime("%H:%M") %></li>
       <li><%= aula.end_time.strftime("%H:%M") %></li>
-      <li><%= aula.spots %></li>
+
+      <% total_attendees = bookings.sum(:attendees) %>
+      <% spots_available = aula.spots - total_attendees %>
+      <li><%= "#{total_attendees}/#{aula.spots}" %></li>
 
       <% if user_signed_in? && !aula.spots.zero? %>
+
         <% booking = current_user.bookings.find_by(aula_id: aula.id) %>
 
-        <%= "this is the status --> #{booking.status}" %>
-
-        <% if booking.status %>
+        <% if booking.present? %>
           <% attendees_count = booking.attendees %>
           <% booking_status = "Aula marcada" %>
         <% else %>
@@ -32,16 +36,12 @@
 
         <li>
           <% if booking.present? %>
-            <%= simple_form_for booking, url: aula_bookings_path(aula, booking), html: { method: :patch } do |f| %>
-              <%= f.hidden_field :attendees, value: attendees_count %>
-              <%= f.hidden_field :status, value: booking_status %>
-              <%= f.submit booking.status ? 'Cancel Booking' : 'Book Class', class: "btn btn-primary" %>
-            <% end %>
+            <%= link_to "Cancelar", aula_booking_path(aula, booking), data: { turbo_method: :delete }, class: "btn btn-primary" %>
           <% else %>
             <%= simple_form_for [aula, Booking.new], url: aula_bookings_path(aula), html: { method: :post } do |f| %>
               <%= f.hidden_field :attendees, value: attendees_count %>
               <%= f.hidden_field :status, value: booking_status %>
-              <%= f.submit booking.status ? 'Cancel Booking' : 'Book Class', class: "btn btn-primary" %>
+              <%= f.submit booking.present? ? 'Cancel Booking' : 'Book Class', class: "btn btn-primary" %>
             <% end %>
           <% end %>
         </li>

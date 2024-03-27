@@ -18,11 +18,11 @@ class BookingsController < ApplicationController
       @booking.aula_id = @aula.id
       @booking.attendees = 1
       @booking.status = true
-    else
-      # Cancel existing booking
-      @booking = booking
-      @booking.attendees -= 1 unless @booking.attendees.zero?
-      @booking.status = false
+    # else
+    #   Cancel existing booking
+    #   @booking = booking
+    #   @booking.attendees -= 1 unless @booking.attendees.zero?
+    #   @booking.status = false
     end
 
     if @booking.save && @aula.save
@@ -42,8 +42,15 @@ class BookingsController < ApplicationController
     # end
   end
 
-  def update
-    
+  def destroy
+    @aula = Aula.find(params[:aula_id])
+    booking = current_user.bookings.find_by(aula_id: @aula.id)
+    @booking = booking
+    if @booking.destroy
+      redirect_to aulas_path, notice: 'Booking was successfully canceled.'
+    end
+    # @booking.attendees -= 1 unless @booking.attendees.zero?
+    # @booking.status = false
   end
 
   private
