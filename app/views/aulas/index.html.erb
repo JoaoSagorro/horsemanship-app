@@ -1,7 +1,7 @@
 <h1>Here will be all the classes for the day</h1>
 
 <% if user_signed_in? %>
-  <% if current_user.admin? %>
+  <% if current_user.admin? || current_user.professor?%>
     <%= link_to "Create a new class", new_aula_path %>
   <% end %>
 <% end %>
@@ -14,6 +14,8 @@
     <ul>
       <%= link_to "Edit", edit_aula_path(aula) %>
       <%= link_to "Destroy", aula_path(aula), data: { turbo_method: :delete, turbo_confirm: "Tem a certeza?" } %>
+      <li><%= aula.title %></li>
+      <li><%= aula.class_type %></li>
       <li><%= aula.occurs_date.strftime("%a, %d %b %Y") %></li>
       <li><%= aula.start_time.strftime("%H:%M") %></li>
       <li><%= aula.end_time.strftime("%H:%M") %></li>

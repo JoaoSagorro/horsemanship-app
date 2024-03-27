@@ -10,6 +10,7 @@
               input_html: {autocomplete: "title", style: "background: white;", placeholder: "Descrição da aula"} %>
   <%= f.input :class_type,
               label: "Tipo de aula",
+              :collection,
               input_html: {autocomplete: "title", style: "background: white;", placeholder: "Tipo de aula"} %>
   <%= f.input :spots,
               label: "Número de vagas",

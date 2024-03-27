@@ -3,13 +3,15 @@ class Aula < ApplicationRecord
   has_many :users, through: :user_aulas
   has_many :bookings, dependent: :destroy
 
+  CLASS_TYPES = ["aula fixe", "aula má"]
   validates :title, presence: true
-  validates :class_type, presence: true
+  validates :class_type, presence: true, inclusion: { in: CLASS_TYPES }
   validates :occurs_date, presence: true
   validates :start_time, presence: true
   validates :end_time, presence: true
   validates :spots, presence: true
   validate :end_time_after_start_time?
+
 
   private
 
