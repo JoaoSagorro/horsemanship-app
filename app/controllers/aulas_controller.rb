@@ -48,7 +48,8 @@ class AulasController < ApplicationController
 
   def today
     @user = current_user
-    @aulas = Aula.all
+    @aulas = Aula.where(occurs_date: Date.today)
+    @bookings = Booking.where(aula_id: @aulas.pluck(:id), user_id: @user.id)
   end
 
   def booked_class
