@@ -12,14 +12,22 @@
 
     <% if aula.occurs_date == Date.today %>
       <div class="card mx-3 my-3">
-        <div class="card-header">
+        <div class="card-header d-flex justify-content-between">
           <div>
             <%= aula.title %>
           </div>
           <div>
-            <%= link_to "Edit", edit_aula_path(aula) %>
-            <%= link_to "Ver aula", aula_path(aula) %>
-            <%= link_to "Destroy", aula_path(aula), data: { turbo_method: :delete, turbo_confirm: "Tem a certeza?" } %>
+            <%= link_to aula_path(aula) do %>
+              <i class="fa-solid fa-circle-info fs-4 mx-2"></i>
+            <% end %>
+            <% if current_user.admin? || current_user.professor?%>
+              <%= link_to edit_aula_path(aula) do %>
+                <i class="fa-solid fa-pen-to-square fs-4 mx-2"></i>
+              <% end %>
+              <%= link_to aula_path(aula), data: { turbo_method: :delete, turbo_confirm: "Tem a certeza?" } do %>
+                <i class="fa-solid fa-trash fs-4 mx-2"></i>
+              <% end %>
+            <% end %>
           </div>
         </div>
 
