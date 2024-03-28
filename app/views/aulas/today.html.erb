@@ -3,22 +3,32 @@
     <% booked_aula = @bookings.find { |booking| booking.aula_id == aula.id } %>
     <% if booked_aula.present? %>
       <div class="card mx-3 my-3">
-        <div class="card-header">
-          <div>
-            <%= aula.title %>
+        <div class="card-header d-flex justify-content-around ">
+          <div class="d-flex align-items-center">
+            <h3>
+              <%= aula.title %>
+            </h3>
           </div>
-          <div>
-            <%= link_to "Edit", edit_aula_path(aula) %>
-            <%= link_to "Ver aula", aula_path(aula) %>
-            <%= link_to "Destroy", aula_path(aula), data: { turbo_method: :delete, turbo_confirm: "Tem a certeza?" } %>
+          <div class="d-flex  align-items-center">
+            <%= link_to aula_path(aula) do %>
+              <i class="fa-solid fa-circle-info fs-4 mx-2 fawesome-color font-awesome-underline"></i>
+            <% end %>
+            <% if current_user.admin? || current_user.professor?%>
+              <%= link_to edit_aula_path(aula) do%>
+                <i class="fa-solid fa-pen-to-square fs-4 mx-2 fawesome-color font-awesome-underline"></i>
+              <% end %>
+              <%= link_to aula_path(aula), data: { turbo_method: :delete, turbo_confirm: "Tem a certeza?" } do %>
+                <i class="fa-solid fa-trash fs-4 mx-2 fawesome-color font-awesome-underline"></i>
+              <% end %>
+            <% end %>
           </div>
         </div>
 
         <div class="card-body d-flex justify-content-around">
           <div class="d-flex flex-column justify-content-start  full-width">
-            <p>
+            <h4>
               <%= aula.class_type %>
-            </p>
+            </h4>
             <p>
               <%= aula.occurs_date.strftime("%d %b %Y") %>
             </p>
