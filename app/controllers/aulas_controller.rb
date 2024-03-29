@@ -16,6 +16,7 @@ class AulasController < ApplicationController
 
   def create
     @aula = Aula.new(set_params)
+    @aula.creator = "#{current_user.first_name} #{current_user.last_name}"
     if @aula.save
       @aula.user_ids = params[:aula][:user_ids] || []
       redirect_to aulas_path
