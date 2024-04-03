@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   get "about", to: "pages#about"
   get "school", to: "pages#school"
   get "today", to: "aulas#today"
+  get "clientes", to: "user_aulas#clientes"
 
   resources :aulas do
     resources :bookings, only: %i[create destroy]

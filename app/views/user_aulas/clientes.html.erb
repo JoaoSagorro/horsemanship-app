@@ -1,0 +1,14 @@
+<% if user_signed_in? %>
+  <% if current_user.admin? || current_user.professor?%>
+    <%= link_to new_user_registration_path do %>
+      <i class="fa-solid fa-square-plus ms-3 mt-2 fs-1 fawesome-color"></i>
+    <% end %>
+  <% end %>
+<% end %>
+
+<% @clients.each do |client| %>
+  <p>
+    <%= client.first_name %> <%= client.last_name %>
+  </p>
+
+<% end %>
