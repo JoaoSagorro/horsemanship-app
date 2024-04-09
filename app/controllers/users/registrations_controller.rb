@@ -3,31 +3,6 @@
 class Users::RegistrationsController < Devise::RegistrationsController
   # before_action :configure_sign_up_params, only: [:create]
   # before_action :configure_account_update_params, only: [:update]
-  before_action :authenticate_user!, except: %i[new creeate]
-  before_action :configure_permitted_params
-
-  def new
-    unless current_user && (current_user.role == 'admin' || current_user == 'professor')
-      redirect_to root_path, alert: "Não tem a permissão necessária"
-    end
-
-    super
-  end
-
-  def create
-    unless current_user && (current_user.role == 'admin' || current_user == 'professor')
-      redirect_to root_path, alert: "Não está autorizado a aceder a esta página."
-    end
-
-    super
-  end
-
-
-  private
-
-  def configure_permitted_params
-    devise_parameter_sanitizer.permit(:sign_up, key: [:role])
-  end
 
   # GET /resource/sign_up
   # def new
