@@ -58,6 +58,10 @@ class AulasController < ApplicationController
     @aula.update(booked: !@aula.booked)
   end
 
+  def all_month
+    @month = (Date.today.at_beggining_of_month..Date.today.at_end_of_month)
+  end
+
 
   private
 

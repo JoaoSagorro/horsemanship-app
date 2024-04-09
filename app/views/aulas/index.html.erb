@@ -6,6 +6,13 @@
   <% end %>
 <% end %>
 
+<section class="border-div">
+  <div class="border-div">
+    <%= date = (Date.today.at_beginning_of_month...Date.today.at_end_of_month).day %>
+    <%= Date.today.at_end_of_month %>
+
+  </div>
+</section>
 
 <% @aulas.each do |aula| %>
   <% bookings = Booking.where(aula_id: aula.id) %>
