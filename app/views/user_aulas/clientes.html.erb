@@ -1,6 +1,6 @@
 <% if user_signed_in? %>
   <% if current_user.admin? || current_user.professor?%>
-    <%= link_to new_user_registration_path do %>
+    <%= link_to new_user_invitation_path do %>
       <i class="fa-solid fa-square-plus ms-3 mt-2 fs-1 fawesome-color"></i>
     <% end %>
   <% end %>
