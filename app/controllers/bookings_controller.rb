@@ -26,9 +26,9 @@ class BookingsController < ApplicationController
     end
 
     if @booking.save && @aula.save
-      redirect_to aulas_path, notice: 'Booking was successfully created/canceled.'
+      redirect_to aulas_path, notice: 'Aula marcada'
     else
-      redirect_to aulas_path, notice: "The booking did nothing"
+      redirect_to aulas_path, notice: "Erro na marcação da aula"
     end
     # @booking = Booking.new(set_params)
     # @booking.aula_id = @aula.id
@@ -47,7 +47,7 @@ class BookingsController < ApplicationController
     booking = current_user.bookings.find_by(aula_id: @aula.id)
     @booking = booking
     if @booking.destroy
-      redirect_to aulas_path, notice: 'Booking was successfully canceled.'
+      redirect_to aulas_path, notice: 'Aula cancelada'
     end
     # @booking.attendees -= 1 unless @booking.attendees.zero?
     # @booking.status = false

@@ -2,14 +2,14 @@
   <%= simple_form_for @aula do |f| %>
 
     <%= f.input :title,
-                label: "Nome",
-                input_html: {autocomplete: "title", style: "background: white;", placeholder: "Nome"} %>
+                label: "Nome da aula",
+                input_html: {autocomplete: "title", style: "background: white;", placeholder: "Ex: Aula privada"} %>
     <%= f.input :description,
                 label: "Descrição da aula",
-                input_html: {autocomplete: "title", style: "background: white;", placeholder: "Descrição da aula"} %>
+                input_html: {autocomplete: "title", style: "background: white;", placeholder: "Ex: Exercício de salto"} %>
     <%= f.input :class_type,
                 as: :select,
-                collection: CLASS_TYPES,
+                collection: Aula::CLASS_TYPES,
                 label: "Tipo de aula",
                 input_html: {autocomplete: "title", style: "background: white;", placeholder: "Tipo de aula"} %>
     <%= f.input :spots,
