@@ -8,6 +8,8 @@
                 label: "Descrição da aula",
                 input_html: {autocomplete: "title", style: "background: white;", placeholder: "Descrição da aula"} %>
     <%= f.input :class_type,
+                as: :select,
+                collection: CLASS_TYPES,
                 label: "Tipo de aula",
                 input_html: {autocomplete: "title", style: "background: white;", placeholder: "Tipo de aula"} %>
     <%= f.input :spots,

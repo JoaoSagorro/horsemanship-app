@@ -6,11 +6,20 @@
   <% end %>
 <% end %>
 
-<section class="border-div">
-  <div class="border-div">
-    <%= date = (Date.today.at_beginning_of_month...Date.today.at_end_of_month).day %>
-    <%= Date.today.at_end_of_month %>
-
+<section class="mt-2">
+  <div class="d-flex justify-content-start overflow-banner">
+    <% Date.today.all_month.to_a.each do |day| %>
+      <div class="card d-flex justify-content-center col-2 date-banner-card mx-3" >
+        <div class="d-flex flex-column card-body justify-content-center align-items-center" >
+          <h2>
+            <%= day.strftime("%d") %>
+          </h2>
+          <p>
+            <%= day.strftime("%b") %>
+          </p>
+        </div>
+      </div>
+    <% end %>
   </div>
 </section>
 

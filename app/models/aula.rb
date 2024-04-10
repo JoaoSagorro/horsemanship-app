@@ -3,7 +3,7 @@ class Aula < ApplicationRecord
   has_many :users, through: :user_aulas
   has_many :bookings, dependent: :destroy
 
-  CLASS_TYPES = ["aula fixe", "aula má"]
+  CLASS_TYPES = ["Aula de obstáculos", "Ensino - Cela 1", "Ensino - Cela 2", "Volteio"]
   validates :title, presence: true
   validates :class_type, presence: true, inclusion: { in: CLASS_TYPES }
   validates :occurs_date, presence: true
@@ -17,7 +17,7 @@ class Aula < ApplicationRecord
 
   def end_time_after_start_time?
     if end_time < start_time
-      errors.add :end_time, "must be after start date"
+      errors.add :end_time, "Tem que ser após data inicial"
     end
   end
 end
