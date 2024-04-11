@@ -11,7 +11,7 @@ class Aula < ApplicationRecord
   validates :end_time, presence: true
   validates :spots, presence: true
   validate :end_time_after_start_time?
-
+  validates :teacher, presence: true
 
   private
 

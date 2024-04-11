@@ -56,7 +56,10 @@
               <%= aula.class_type %>
             </p>
             <p>
-              <%= aula.creator %>
+              <% # Fetch the teacher's name using the teacher's id %>
+              <% teacher = User.find_by(id: aula.teacher) %>
+              <%= teacher ? teacher.full_name : "Professor não encontrado" %>
+            </p>
             </p>
             <p>
               <%= aula.occurs_date.strftime("%d %b %Y") %>

@@ -17,6 +17,7 @@ class AulasController < ApplicationController
   def create
     @aula = Aula.new(set_params)
     @aula.creator = "#{current_user.first_name} #{current_user.last_name}"
+    @teacher = User.where(role: :professor).map { |id| id}
     if @aula.save
       @aula.user_ids = params[:aula][:user_ids] || []
       redirect_to aulas_path
@@ -66,6 +67,16 @@ class AulasController < ApplicationController
   private
 
   def set_params
-    params.require(:aula).permit(:title, :description, :class_type, :comments, :occurs_date, :start_time, :end_time, :spots)
+    params.require(:aula).permit(
+      :title,
+      :description,
+      :class_type,
+      :comments,
+      :occurs_date,
+      :start_time,
+      :end_time,
+      :spots,
+      :teacher
+    )
   end
 end
