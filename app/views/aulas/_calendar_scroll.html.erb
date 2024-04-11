@@ -4,11 +4,13 @@
   <% Date.today.all_month.to_a.each do |day| %>
     <div
       class="border-div card d-flex justify-content-center col-2 date-banner-card mx-3"
+      data-action="click->book-class#dataSelected"
+      data-book-class-date="<%= day.strftime("%Y-%m-%d") %>"
     >
       <div
         class="d-flex flex-column card-body justify-content-center align-items-center"
-        data-action="click->book-class#dataSelected"
         data-book-class-target="card"
+        id="<%= day.strftime("%d") %>"
       >
         <h2>
           <%= day.strftime("%d") %>
@@ -20,3 +22,4 @@
     </div>
   <% end %>
 </div>
+
