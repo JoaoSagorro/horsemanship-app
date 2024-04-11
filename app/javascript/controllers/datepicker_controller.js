@@ -1,6 +1,7 @@
 import { Controller } from "@hotwired/stimulus";
 import flatpickr from "flatpickr";
 
+
 // Connects to data-controller="datepicker"
 export default class extends Controller {
   connect() {
@@ -28,6 +29,25 @@ export default class extends Controller {
 
         // Redirect to the page with the selected date
         window.location.href = url;
+      }
+    });
+  };
+
+  showClasses(event) {
+    const date = event.currentTarget.dataset.date;
+    const url = `/aulas?date=${date}`; // Replace this URL with your actual endpoint
+
+    Rails.ajax({
+      type: "GET",
+      url: url,
+      success: (data) => {
+        // Handle the successful response
+        console.log("Classes for date: ", date, data);
+        // Here, you can update the DOM to display the fetched classes
+      },
+      error: (error) => {
+        // Handle any errors
+        console.error("Error fetching classes: ", error);
       }
     });
   }
