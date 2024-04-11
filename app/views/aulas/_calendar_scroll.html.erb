@@ -1,3 +1,8 @@
+<div class="my-3 mx-3">
+  <input type="text" id="datepicker" placeholder="Select a date" data-controller="datepicker">
+</div>
+
+
 <div class="d-flex justify-content-start overflow-banner">
   <% Date.today.all_month.to_a.each do |day| %>
     <div class="card d-flex justify-content-center col-2 date-banner-card mx-3" >
@@ -12,3 +17,24 @@
     </div>
   <% end %>
 </div>
+
+<%# <div class="d-flex justify-content-start overflow-banner" data-controller="book-class">
+  <% Date.today.all_month.to_a.each do |day| %>
+    <%# <div
+      class="border-div card d-flex justify-content-center col-2 date-banner-card mx-3"
+    >
+      <div
+        class="d-flex flex-column card-body justify-content-center align-items-center"
+        data-action="click->book-class#dataSelected"
+        data-book-class-target="card"
+      >
+        <h2>
+          <%= day.strftime("%d") %>
+        <%# </h2>
+        <p>
+          <%= day.strftime("%b") %>
+        <%# </p>
+      </div>
+    </div>
+  <% end %>
+<%# </div> %>
