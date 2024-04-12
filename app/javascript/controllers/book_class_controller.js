@@ -28,7 +28,7 @@ import { Controller } from "@hotwired/stimulus";
 export default class extends Controller {
   static targets = ["card", "outsideCard"];
 
-  connect() {
+  connect(event) {
     console.log("You're connected");
     const cards = this.cardTargets
     cards.map((card) => {
@@ -37,7 +37,7 @@ export default class extends Controller {
     // console.log(this.outsideCardTargets)
     const defaultCard = this.outsideCardTargets.find(date => date.getAttribute("data-book-class-date") === new Date().toISOString().split("T")[0])
     defaultCard.classList.add("background-change")
-    defaultCard.scrollIntoView({behaviour: "smooth", inline: "center"})
+    defaultCard.scrollIntoView({behaviour: "smooth", block: "nearest", inline: "center"})
     console.log(defaultCard)
     console.log(new Date().toISOString().split("T")[0])
   }
@@ -50,7 +50,7 @@ export default class extends Controller {
     console.log("Selected date:", date);
     console.dir(card)
     divs.forEach(div => div.classList.remove("background-change"))
-    card.scrollIntoView({behaviour: "smooth", inline: "center", transition: "ease"})
+    card.scrollIntoView({behaviour: "smooth", block: "nearest", inline: "center"})
     // Toggle background color or perform other actions as needed
     card.classList.toggle("background-change");
   }
