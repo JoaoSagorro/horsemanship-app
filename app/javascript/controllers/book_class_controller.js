@@ -35,9 +35,12 @@ export default class extends Controller {
   dataSelected(event) {
     const card = event.currentTarget;
     const date = card.getAttribute("data-book-class-date");
+    const divs = document.querySelectorAll("#this-target")
 
     console.log("Selected date:", date);
-
+    console.log(card)
+    console.log(divs)
+    divs.forEach(div => div.classList.remove("background-change"))
     // Toggle background color or perform other actions as needed
     card.classList.toggle("background-change");
   }
