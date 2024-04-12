@@ -2,7 +2,7 @@
   <% @aulas.each do |aula| %>
     <% booked_aula = @bookings.find { |booking| booking.aula_id == aula.id } %>
     <% if booked_aula.present? %>
-      <div class="card mx-3 my-3">
+      <div class="card mx-3 my-3 border-radius">
         <div class="card-header d-flex justify-content-around ">
           <div class="d-flex align-items-center">
             <h3>
@@ -69,12 +69,12 @@
               </div>
 
               <% if booking.present? %>
-                <%= link_to "Cancelar", aula_booking_path(aula, booking), data: { turbo_method: :delete }, class: "btn btn-secondary" %>
+                <%= link_to "Cancelar", aula_booking_path(aula, booking), data: { turbo_method: :delete }, class: "btn btn-secondary border-radius" %>
               <% else %>
                 <%= simple_form_for [aula, Booking.new], url: aula_bookings_path(aula), html: { method: :post } do |f| %>
                   <%= f.hidden_field :attendees, value: attendees_count %>
                   <%= f.hidden_field :status, value: booking_status %>
-                  <%= f.submit booking.present? ? '' : 'Marcar aula', class: "btn btn-primary" %>
+                  <%= f.submit booking.present? ? '' : 'Marcar aula', class: "btn btn-primary border-radius" %>
                 <% end %>
               <% end %>
             </div>
