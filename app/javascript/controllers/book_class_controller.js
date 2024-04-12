@@ -50,7 +50,7 @@ export default class extends Controller {
     console.log("Selected date:", date);
     console.dir(card)
     divs.forEach(div => div.classList.remove("background-change"))
-    card.scrollIntoView({behaviour: "smooth", inline: "center", })
+    card.scrollIntoView({behaviour: "smooth", inline: "center", transition: "ease"})
     // Toggle background color or perform other actions as needed
     card.classList.toggle("background-change");
   }
