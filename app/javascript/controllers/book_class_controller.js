@@ -26,10 +26,20 @@ import { Controller } from "@hotwired/stimulus";
 
 // Connects to data-controller="book-class"
 export default class extends Controller {
-  static targets = ["card"];
+  static targets = ["card", "outsideCard"];
 
   connect() {
     console.log("You're connected");
+    const cards = this.cardTargets
+    cards.map((card) => {
+      card.hidden = true
+    })
+    // console.log(this.outsideCardTargets)
+    const defaultCard = this.outsideCardTargets.find(date => date.getAttribute("data-book-class-date") === new Date().toISOString().split("T")[0])
+    defaultCard.classList.add("background-change")
+    defaultCard.scrollIntoView({behaviour: "smooth", inline: "center"})
+    console.log(defaultCard)
+    console.log(new Date().toISOString().split("T")[0])
   }
 
   dataSelected(event) {
@@ -38,9 +48,9 @@ export default class extends Controller {
     const divs = document.querySelectorAll("#this-target")
 
     console.log("Selected date:", date);
-    console.log(card)
-    console.log(divs)
+    console.dir(card)
     divs.forEach(div => div.classList.remove("background-change"))
+    card.scrollIntoView({behaviour: "smooth", inline: "center", })
     // Toggle background color or perform other actions as needed
     card.classList.toggle("background-change");
   }
