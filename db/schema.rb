@@ -10,9 +10,30 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_04_11_095341) do
+ActiveRecord::Schema[7.1].define(version: 2024_04_16_105757) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "aluno_profiles", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.string "morada"
+    t.date "birthdate"
+    t.integer "nif"
+    t.integer "numero_utente"
+    t.integer "cartao_cidadao"
+    t.date "validity"
+    t.integer "contacto"
+    t.string "encarregado_educação"
+    t.string "grau_parentesco"
+    t.integer "contacto_emergencia"
+    t.string "aulas"
+    t.string "horario_preferencial"
+    t.boolean "recolha_dados"
+    t.boolean "fotografias_captadas"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_aluno_profiles_on_user_id"
+  end
 
   create_table "aulas", force: :cascade do |t|
     t.string "title"
@@ -75,6 +96,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_11_095341) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "aluno_profiles", "users"
   add_foreign_key "bookings", "aulas"
   add_foreign_key "bookings", "users"
   add_foreign_key "user_aulas", "aulas"

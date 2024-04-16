@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   get "today", to: "aulas#today"
   get "clientes", to: "user_aulas#clientes"
 
+  resources :aluno_profiles
   resources :aulas do
     resources :bookings, only: %i[create destroy]
   end

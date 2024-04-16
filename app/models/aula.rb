@@ -3,7 +3,7 @@ class Aula < ApplicationRecord
   has_many :users, through: :user_aulas
   has_many :bookings, dependent: :destroy
 
-  CLASS_TYPES = ["Aula de obstáculos", "Ensino - Cela 1", "Ensino - Cela 2", "Volteio"]
+  CLASS_TYPES = ["Aula de obstáculos", "Ensino - Sela 1", "Ensino - Sela 2", "Volteio"]
   validates :title, presence: true
   validates :class_type, presence: true, inclusion: { in: CLASS_TYPES }
   validates :occurs_date, presence: true

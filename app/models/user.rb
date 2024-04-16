@@ -2,6 +2,7 @@ class User < ApplicationRecord
   has_many :user_aulas
   has_many :aulas, through: :user_aulas
   has_many :bookings
+  has_one :aluno_profile
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :invitable, :database_authenticatable, :registerable,
