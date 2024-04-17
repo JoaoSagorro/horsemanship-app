@@ -5,23 +5,7 @@ class Users::InvitationsController < Devise::InvitationsController
     super do |resource|
       if resource.persisted? && resource.role == "aluno"
         AlunoProfile.create(
-          params.require(:user).permit(
-            :user,
-            :morada,
-            :birthdate,
-            :nif,
-            :numero_utente,
-            :cartao_cidadao,
-            :validity,
-            :contacto,
-            :encarregado_educação,
-            :grau_parentesco,
-            :contacto_emergencia,
-            :aulas,
-            :horario_preferencial,
-            :recolha_dados,
-            :fotografias_captadas
-          )
+          set_params
         )
       end
     end
@@ -30,12 +14,30 @@ class Users::InvitationsController < Devise::InvitationsController
   private
 
   def set_params
-    params.require(:user).permit(:email, :first_name, :last_name)
+    params.require(:user).permit(
+      :user,
+      :first_name,
+      :last_name,
+      :morada,
+      :birthdate,
+      :nif,
+      :numero_utente,
+      :cartao_cidadao,
+      :validity,
+      :contacto,
+      :encarregado_educação,
+      :grau_parentesco,
+      :contacto_emergencia,
+      :aulas,
+      :horario_preferencial,
+      :recolha_dados,
+      :fotografias_captadas
+    )
   end
 
   protected
 
   def configure_permitted_parameters
-    devise_parameter_sanitizer.permit(:invite, keys: [:first_name, :last_name, :role])
+    devise_parameter_sanitizer.permit(:invite, keys: %i[first_name last_name role email])
   end
 end

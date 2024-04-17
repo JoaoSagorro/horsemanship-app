@@ -1,15 +1,15 @@
-<h2><%= t "devise.invitations.edit.header" %></h2>
+<h2 class="mx-3 mt-2"><%= t "devise.invitations.edit.header" %></h2>
 
 <%= simple_form_for(resource, as: resource_name, url: invitation_path(resource_name), html: { method: :put }) do |f| %>
   <%= f.error_notification %>
   <%= f.hidden_field :invitation_token %>
 
-  <div class="form-inputs">
+  <div class="form-inputs mx-3 mt-3">
     <%= f.input :password %>
     <%= f.input :password_confirmation %>
   </div>
 
-  <div class="form-actions">
-    <%= f.button :submit, t("devise.invitations.edit.submit_button") %>
+  <div class="form-actions mx-3">
+    <%= f.button :submit, t("devise.invitations.edit.submit_button"), class: "btn btn-primary border-radius" %>
   </div>
 <% end %>
