@@ -23,6 +23,7 @@ module HorsemanshipApp
 
     # Configuration for the application, engines, and railties goes here.
     #
+    config.action_mailer.default_url_options = { host: ENV.fetch("HOST_URL") }
     # These settings can be overridden in specific environments using the files
     # in config/environments, which are processed later.
     #
