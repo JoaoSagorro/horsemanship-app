@@ -39,6 +39,6 @@ class Users::InvitationsController < Devise::InvitationsController
 
   # Permit the new params here.
   def configure_permitted_parameters
-    devise_parameter_sanitizer.permit(:invite, keys: [:first_name, :last_name, :role])
+    devise_parameter_sanitizer.permit :accept_invitation, keys: %i[first_name last_name email role]
   end
 end
