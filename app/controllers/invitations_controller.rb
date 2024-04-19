@@ -2,6 +2,7 @@ class Users::InvitationsController < Devise::InvitationsController
   before_action :configure_permitted_parameters
 
   def create
+    raise
     super do |resource|
       if resource.persisted? && resource.role == "aluno"
         AlunoProfile.create(
@@ -15,7 +16,6 @@ class Users::InvitationsController < Devise::InvitationsController
 
   def set_params
     params.require(:user).permit(
-      :user,
       :first_name,
       :last_name,
       :morada,
@@ -37,7 +37,8 @@ class Users::InvitationsController < Devise::InvitationsController
 
   protected
 
+  # Permit the new params here.
   def configure_permitted_parameters
-    devise_parameter_sanitizer.permit(:invite, keys: %i[first_name last_name role email])
+    devise_parameter_sanitizer.permit(:invite, keys: [:first_name, :last_name, :role])
   end
 end
