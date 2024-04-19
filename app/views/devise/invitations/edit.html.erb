@@ -9,6 +9,11 @@
     <%= f.input :password_confirmation %>
   </div>
 
+  <div class="form-inputs mx-3 mt-3">
+    <%= f.input :first_name %>
+    <%= f.input :last_name %>
+  </div>
+
   <div class="form-actions mx-3">
     <%= f.button :submit, t("devise.invitations.edit.submit_button"), class: "btn btn-primary border-radius" %>
   </div>

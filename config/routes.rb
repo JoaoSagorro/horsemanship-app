@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   # devise_for :users
-  devise_for :users, RegistrationsController: { registrations: 'registrations'}
+  devise_for :users, RegistrationsController: { registrations: 'registrations', intivations: 'users/invitations'}
 
   root to: "pages#home"
 

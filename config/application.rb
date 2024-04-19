@@ -8,11 +8,6 @@ Bundler.require(*Rails.groups)
 
 module HorsemanshipApp
   class Application < Rails::Application
-
-    def configure_permitted_parameters
-      devise_parameter_sanitizer.permit :accept_invitation, keys: %i[first_name last_name email role]
-    end
-
     config.generators do |generate|
       generate.assets false
       generate.helper false
