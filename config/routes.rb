@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   get "school", to: "pages#school"
   get "today", to: "aulas#today"
   get "clientes", to: "user_aulas#clientes"
+  get "profile", to: "aluno_profiles#profile"
 
   resources :aluno_profiles
   resources :aulas do
