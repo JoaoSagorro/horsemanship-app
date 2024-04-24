@@ -11,6 +11,7 @@ class User < ApplicationRecord
   enum role: [:aluno, :professor, :admin]
 
   after_initialize :set_default_role, :if => :new_record?
+  after_create :create_aluno_profile, if: :aluno?
 
   def set_default_role
     self.role ||= :user
@@ -18,5 +19,11 @@ class User < ApplicationRecord
 
   def full_name
     "#{first_name} #{last_name}"
+  end
+
+  private
+
+  def create_aluno_profile
+    self.create.aluno_profile unless self.aluno_profile
   end
 end
