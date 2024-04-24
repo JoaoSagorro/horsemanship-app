@@ -1,3 +1,4 @@
+
 <% if user_signed_in? %>
   <% if current_user.admin? || current_user.professor?%>
     <%= link_to new_user_invitation_path do %>
@@ -6,23 +7,45 @@
   <% end %>
 <% end %>
 
-<% @alunos.each do |aluno| %>
-  <%= aluno %>
-<% end %>
+<table class="table mt-3">
+  <thead>
+    <tr class="text-start">
+      <th>#</th>
+      <th>Nome:</th>
+      <th>Data de Nascimento:</th>
+      <th>Contacto:</th>
+      <th>NIF:</th>
+      <th>Aulas:</th>
+      <th>Horário Preferencial:</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @clients.each do |client| %>
+      <tr class="text-start">
+        <td>
+          <%= client.id %>
+        </td>
+        <td>
+          <%= client.first_name %> <%= client.last_name %>
+        </td>
 
-<% @clients.each do |client| %>
-  <div class="card border-radius text-center mx-3 mt-2">
-    <div class="card-header">
-      <%= client.first_name %> <%= client.last_name %>
-
-    </div>
-    <div class="card-body">
-      <h5 class="card-title">Special title treatment</h5>
-      <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-    </div>
-    <div class="card-footer text-body-secondary">
-      Dias até novo pagamento: 2 days ago
-    </div>
-  </div>
-
-<% end %>
+        <% aluno = client.aluno_profile %>
+        <td>
+          <%= aluno.birthdate %>
+        </td>
+        <td>
+          <%= client.first_name %> <%= client.last_name %>
+        </td>
+        <td>
+          <%= client.first_name %> <%= client.last_name %>
+        </td>
+        <td>
+          <%= client.first_name %> <%= client.last_name %>
+        </td>
+        <td>
+          <%= client.first_name %> <%= client.last_name %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
