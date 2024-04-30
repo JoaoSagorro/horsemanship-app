@@ -1,0 +1,13 @@
+<h1>Edit page</h1>
+
+
+  <%= simple_form_for @user do |f| %>
+    <%= turbo_frame_tag '12345' do %>
+      <%= f.input :first_name,
+                label: "Name",
+                input_html: {autocomplete: "Name", style: "background: white;", placeholder: "Ex: Aula privada"} %>
+    <% end %>
+    <%= f.input :morada,
+                label: "Name",
+                input_html: {autocomplete: "Name", style: "background: white;", placeholder: "Ex: Aula privada"} %>
+  <% end %>
