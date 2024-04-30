@@ -24,6 +24,7 @@ class User < ApplicationRecord
   private
 
   def create_aluno_profile
-    self.create.aluno_profile unless self.aluno_profile
+    self.build_aluno_profile unless self.aluno_profile
+  self.save
   end
 end

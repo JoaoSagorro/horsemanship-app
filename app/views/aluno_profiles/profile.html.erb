@@ -1,1 +1,11 @@
 <h1>This is the profile page</h1>
+
+<ul>
+  <li><%= current_user.first_name %></li>
+  <li><%= current_user.last_name %></li>
+  <li><%= current_user.email %></li>
+  <li>
+    <%= current_user.aluno_profile.morada %>
+    <%= link_to "Edit", edit_aluno_profile_path(current_user.aluno_profile.user_id) %>
+  </li>
+</ul>

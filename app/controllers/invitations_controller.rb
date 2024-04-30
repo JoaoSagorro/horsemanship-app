@@ -4,7 +4,7 @@ class Users::InvitationsController < Devise::InvitationsController
   def create
     super do |resource|
       if resource.persisted? && resource.role == "aluno"
-        AlunoProfile.create(
+        AlunoProfiles.create(
           set_params
         )
       end
